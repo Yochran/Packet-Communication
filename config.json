@@ -1,0 +1,5 @@
+{
+    "S_DELAY" : 5,
+    "S_UNIT" : "SECONDS",
+    "JSON_CHECK_INTERVAL" : 5
+}
