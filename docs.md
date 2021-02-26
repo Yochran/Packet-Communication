@@ -1,2 +1,2 @@
 # Docs:
-<docs will be here when I finish the first stable release>
+(docs will be here when I finish the first stable release)
