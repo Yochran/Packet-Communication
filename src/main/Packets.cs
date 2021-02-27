@@ -24,6 +24,8 @@ namespace PacketCommunicator
                 U_SETCOLOR(ConsoleColor.DarkGreen);
                 Console.WriteLine($"\nSent message to {I_IP}: {I_PDATA}");
                 U_RESETCOLOR();
+
+                P_RECEIVEPACKET(R_PDATA);
             } catch (SystemException)
             {
                 U_SETCOLOR(ConsoleColor.Red);
@@ -31,6 +33,23 @@ namespace PacketCommunicator
                 U_RESETCOLOR();
                 Console.ReadLine();
             }
+        }
+
+        public void P_RECEIVEPACKET(byte[] I_PDATA)
+        {
+            IPEndPoint R_EP = new IPEndPoint(IPAddress.Any, 80);
+            Socket R_CLIENT = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            R_CLIENT.Bind(R_EP);
+
+            IPEndPoint R_SENDER = new IPEndPoint(IPAddress.Any, 80);
+            EndPoint R_REMOTE = (EndPoint)(R_SENDER);
+            int R_REC_V = R_CLIENT.ReceiveFrom(I_PDATA, ref R_REMOTE);
+
+            U_SETCOLOR(ConsoleColor.DarkGreen);
+            Console.WriteLine($"\nTest");
+            Console.WriteLine($"\nReceived message message from {0}: {R_REMOTE.ToString()}");
+            Console.WriteLine(Encoding.ASCII.GetString(I_PDATA, 80, R_REC_V));
+            U_RESETCOLOR();
         }
     }
 }
